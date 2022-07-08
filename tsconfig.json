@@ -1,11 +1,16 @@
 {
-	"extends": "@tsconfig/svelte/tsconfig.json",
 	"compilerOptions": {
+		"jsx": "react-jsx",
+		"importsNotUsedAsValues": "preserve",
 		"module": "commonjs",
+		"types": [
+			"node"
+		],
 		"target": "es6",
 		"outDir": "out",
 		"lib": [
-			"es6"
+			"es6",
+			"DOM"
 		],
 		"skipLibCheck": false,
 		"sourceMap": true,
@@ -20,9 +25,14 @@
 		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
 		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
 	},
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true,
+			"modules": true
+		}
+	},
 	"exclude": [
 		"node_modules",
 		".vscode-test",
-		"webviews"
 	]
 }

@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import getNonce from "./getNonce";
+import SideBar from "./Sidebar";
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
@@ -52,11 +53,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     );
 
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/sidebar.js")
+      vscode.Uri.joinPath(this._extensionUri, "out", "Sidebar.js")
     );
-    const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/sidebar.css")
-    );
+    // const styleMainUri = webview.asWebviewUri(
+    //   vscode.Uri.joinPath(this._extensionUri, "out", "Sidebar.css")
+    // );
 
     // Use a nonce to only allow a specific script to be run.
     const nonce = getNonce();
@@ -73,13 +74,13 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${styleResetUri}" rel="stylesheet">
 				<link href="${styleVSCodeUri}" rel="stylesheet">
-        <link href="${styleMainUri}" rel="stylesheet">
         <script nonce="${nonce}">
         const tsvscode = acquireVsCodeApi();
         </script>
 			</head>
       <body>
-				<script nonce="${nonce}" src="${scriptUri}"></script>
+      hello
+      				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</body>
 			</html>`;
   }
