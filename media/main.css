@@ -1,0 +1,34 @@
+body {
+  background-color: transparent;
+}
+
+.questions {
+  counter-reset: questions;
+}
+.question::before {
+  counter-increment: questions;
+  content: "Similar question " counter(questions) ":";
+  text-decoration: underline;
+}
+.question {
+  font-size: small;
+  margin-top: 25px;
+  counter-reset: answers;
+}
+
+.answer::before {
+  counter-increment: answers;
+  content: "Answer " counter(answers) ":";
+  font-size: large;
+  text-decoration: underline;
+}
+.answer {
+  /* border: 2px solid yellow; */
+  outline-offset: 2px;
+}
+.title {
+  font-size: larger;
+}
+.answer + .answer {
+  margin-top: 20px;
+}

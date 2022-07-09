@@ -1,38 +1,19 @@
 {
 	"compilerOptions": {
 		"jsx": "react-jsx",
-		"importsNotUsedAsValues": "preserve",
 		"module": "commonjs",
-		"types": [
-			"node"
-		],
-		"target": "es6",
-		"outDir": "out",
+		"target": "es2020",
 		"lib": [
-			"es6",
-			"DOM"
+			"es2020",
+			"dom"
 		],
-		"skipLibCheck": false,
+		"outDir": "out",
 		"sourceMap": true,
-		"rootDirs": [
-			"src",
-			"./webviews/types/"
-		],
-		"allowSyntheticDefaultImports": true,
-		"strict": true /* enable all strict type-checking options */
-		/* Additional Checks */
-		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
-		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
-		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
-	},
-	"parserOptions": {
-		"ecmaFeatures": {
-			"jsx": true,
-			"modules": true
-		}
+		"strict": true,
+		"rootDir": "src"
 	},
 	"exclude": [
 		"node_modules",
-		".vscode-test",
+		".vscode-test"
 	]
 }

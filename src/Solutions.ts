@@ -5,34 +5,12 @@
 // // // });
 // // // import { config } from "dotenv";
 // // import { URLSearchParams } from "url";
-// var { URLSearchParams } = require("url");
-// var fetch = require("node-fetch");
+// // var { URLSearchParams } = require("url");
+// // var fetch = require("node-fetch");
 
 // // var { Answer } = require("E:\\SharedCo\\googlerr\\webviews\\types\\Types");
-// // import type { Answer, LintingError, Question } from "../webviews/types/Types";
-// // var { Answer, LintingError, Question } = require("../webviews/types/Types");
+// import type { Answer, LintingError, Question } from "./types";
 // // import fetch from "node-fetch";
-
-// interface LintingError {
-//   errorMessage: string;
-//   problematic: string;
-// }
-
-// interface Message {
-//   command: string;
-//   value: any;
-// }
-// interface Answer {
-//   dateCreated: string;
-//   text: string;
-//   upvoteCount: string;
-// }
-// interface Question {
-//   title: string;
-//   htmlTitle: string;
-//   link: string;
-//   answers: Answer[];
-// }
 
 // // // const confd = config({ path: "E:\\SharedCo\\googlerr\\src\\.env" });
 // // // console.log("%csolutions.ts line:10 confd", "color: #007acc;", confd);
@@ -73,11 +51,12 @@
 //       dateCreated: a.datecreated,
 //       text: a.text,
 //       upvoteCount: a.upvotecount,
+//       isAccepted: false,
 //     });
 //   });
 //   return ret;
 // }
-export function searchForSolution(error: any): Promise<any[]> {
-  // return search(error.errorMessage);
-  return Promise.resolve([]);
-}
+// export function searchForSolution(error: LintingError): Promise<Question[]> {
+//   return search(error.error);
+//   //   return Promise.resolve([]);
+// }

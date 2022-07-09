@@ -60,9 +60,9 @@ button:hover {
   background: var(--vscode-button-hoverBackground);
 }
 
-button:focus {
-  outline-color: var(--vscode-focusBorder);
-}
+/* button:focus {
+	outline-color: var(--vscode-focusBorder);
+} */
 
 button.secondary {
   color: var(--vscode-button-secondaryForeground);

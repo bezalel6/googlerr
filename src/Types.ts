@@ -1,16 +1,19 @@
-export interface LintingError {
-  errorMessage: string;
-  problematic: string;
-}
+import { Diagnostic } from "vscode";
 
+export type LintingError = {
+  error: string;
+  origin: string;
+  fullError: Diagnostic;
+};
 export interface Message {
   command: string;
   value: any;
 }
 export interface Answer {
   dateCreated: string;
-  text: string;
+  html: string;
   upvoteCount: string;
+  isAccepted: boolean;
 }
 export interface Question {
   title: string;
