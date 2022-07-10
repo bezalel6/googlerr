@@ -3,7 +3,7 @@ import type { Answer, LintingError, Question } from "./types";
 // console.log(process.env);
 
 // remove this after you've confirmed it working
-
+let wrapping = false;
 (function () {
   const vscode = acquireVsCodeApi();
 
@@ -17,11 +17,17 @@ import type { Answer, LintingError, Question } from "./types";
         document.body.innerHTML = "";
         break;
       }
+      case "wrapping": {
+        wrapping = !wrapping;
+        refreshCode();
+        break;
+      }
       case "search": {
         const error: LintingError = message.error;
         const div = document.createElement("div");
-        const header = document.createElement("h3");
-        header.innerText = "Searching for similar questions";
+        const header = document.createElement("h2");
+        // header.style.textDecoration = "underline";
+        header.innerText = "Searching: " + error.error;
         div.appendChild(header);
         document.body.appendChild(div);
         search(error.error).then(async (res) => {
@@ -36,14 +42,22 @@ import type { Answer, LintingError, Question } from "./types";
           div.appendChild(ul);
           //   header.innerText = JSON.stringify(res);
         });
+        refreshCode();
         break;
       }
     }
   });
 })();
+function refreshCode() {
+  console.log(wrapping);
+  document.querySelectorAll("code").forEach((element) => {
+    if (wrapping) element.setAttribute("wrapping", "true");
+    else element.removeAttribute("wrapping");
+  });
+}
 function questionComponent(question: Question) {
   const component = create({ className: "question" });
-  const questionTitle = create({ className: "title", t: "button" });
+  const questionTitle = create({ className: "title secondary", t: "h6" });
   // a.href = question.link;
   questionTitle.innerText = question.title;
   component.appendChild(questionTitle);

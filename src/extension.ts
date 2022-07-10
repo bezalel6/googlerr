@@ -1,11 +1,12 @@
 import { FC } from "react";
 import React = require("react");
 import * as vscode from "vscode";
-import { ColorsViewProvider } from "./ColorsViewProvider";
+import { ViewProvider } from "./ViewProvider";
 import { LintingError } from "./types";
 
 export function activate(context: vscode.ExtensionContext) {
-  const provider = new ColorsViewProvider(context.extensionUri);
+  console.log("ACTIVATING");
+  const provider = new ViewProvider(context.extensionUri);
 
   context.subscriptions.push(
     vscode.languages.registerCodeActionsProvider("*", new Emojizer(), {
@@ -14,10 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
   );
 
   context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(
-      ColorsViewProvider.viewType,
-      provider
-    )
+    vscode.window.registerWebviewViewProvider(ViewProvider.viewType, provider)
   );
 
   context.subscriptions.push(
@@ -29,9 +27,23 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand("googlerr.clear", () => {
-      provider.clearColors();
+      provider.clear();
     })
   );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("googlerr.wrapping", () => {
+      provider.wrapping();
+    })
+  );
+  const statusBarItem = vscode.window.createStatusBarItem(
+    vscode.StatusBarAlignment.Right,
+    10
+  );
+  statusBarItem.command = "googlerr-sidebar-view.focus";
+  statusBarItem.text = "MYVIEW";
+  statusBarItem.show();
+  context.subscriptions.push(statusBarItem);
+
   context.subscriptions.push(
     vscode.commands.registerCommand(COMMAND, () =>
       vscode.env.openExternal(

@@ -1,11 +1,11 @@
 {
   "name": "googlerr",
-  "description": "Calico Colors - A Webview View API Sample",
+  "description": "Googlerr - google your way out of any error",
   "version": "0.0.1",
   "publisher": "bezalel6",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.50.0"
+    "vscode": "^1.68.1"
   },
   "extensionKind": [
     "ui",
@@ -18,7 +18,7 @@
     "onView:googlerr-sidebar-view",
     "onCommand:googleErr.searchErr",
     "onCommand:googleErr.clear",
-    "*"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -27,7 +27,7 @@
         {
           "id": "googlerr-sidebar-view",
           "title": "Googlerr",
-          "icon": "media/error.svg"
+          "icon": "$(bracket-error)"
         }
       ]
     },
@@ -36,27 +36,38 @@
         {
           "type": "webview",
           "id": "googlerr-sidebar-view",
-          "name": "Calico Colors"
+          "name": "Googlerr"
         }
       ]
     },
     "commands": [
       {
         "command": "googlerr.searchErr",
-        "category": "Calico Colors",
+        "category": "Googlerr",
         "title": "Search Error"
       },
       {
         "command": "googlerr.clear",
-        "category": "Calico Colors",
+        "category": "Googlerr",
         "title": "Clear",
         "icon": "$(clear-all)"
+      },
+      {
+        "command": "googlerr.wrapping",
+        "category": "Googlerr",
+        "title": "code wrapping - will make code pretty but might break borders",
+        "icon": "$(word-wrap)"
       }
     ],
     "menus": {
       "view/title": [
         {
           "command": "googlerr.clear",
+          "group": "navigation",
+          "when": "view == googlerr-sidebar-view"
+        },
+        {
+          "command": "googlerr.wrapping",
           "group": "navigation",
           "when": "view == googlerr-sidebar-view"
         }
@@ -88,5 +99,10 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "react": "^18.2.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bezalel6/googlerr.git"
+  },
+  "homepage": "https://github.com/bezalel6/googlerr/blob/c6cff034f76bb931b43e7e8db87cadea95ee0c14/README.md"
 }

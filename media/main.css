@@ -5,15 +5,34 @@ body {
 .questions {
   counter-reset: questions;
 }
+/* *,
+*::before,
+*::after {
+  word-wrap: break-word;
+} */
+
+code[wrapping] {
+  display: inline-block;
+  white-space: normal;
+  max-width: 100%;
+  word-break: break-word;
+  word-wrap: break-word;
+}
 .question::before {
   counter-increment: questions;
   content: "Similar question " counter(questions) ":";
   text-decoration: underline;
 }
 .question {
+  word-wrap: break-word;
+
+  width: auto;
   font-size: small;
   margin-top: 25px;
   counter-reset: answers;
+  outline: 2px solid ivory;
+  outline-offset: 5px;
+  /* border: 2px solid ivory; */
 }
 
 .answer::before {

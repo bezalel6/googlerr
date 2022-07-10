@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import { getNonce } from "./extension";
 import { LintingError } from "./types";
 
-export class ColorsViewProvider implements vscode.WebviewViewProvider {
+export class ViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewType = "googlerr-sidebar-view";
 
   private _view?: vscode.WebviewView;
@@ -25,33 +25,46 @@ export class ColorsViewProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
-    webviewView.webview.onDidReceiveMessage((data) => {
-      switch (data.type) {
-        case "colorSelected": {
-          vscode.window.activeTextEditor?.insertSnippet(
-            new vscode.SnippetString(`#${data.value}`)
-          );
-          break;
-        }
-      }
-    });
+    // webviewView.webview.onDidReceiveMessage((data) => {
+    //   switch (data.type) {
+    //     case "colorSelected": {
+    //       vscode.window.activeTextEditor?.insertSnippet(
+    //         new vscode.SnippetString(`#${data.value}`)
+    //       );
+    //       break;
+    //     }
+    //   }
+    // });
   }
   public searchError(err: LintingError) {
+    this.show();
     if (this._view) {
       this._view.show?.(true); // `show` is not implemented in 1.49 but is for 1.50 insiders
       this._view.webview.postMessage({ type: "search", error: err });
-    }
-  }
-  public addColor() {
-    if (this._view) {
-      this._view.show?.(true); // `show` is not implemented in 1.49 but is for 1.50 insiders
-      this._view.webview.postMessage({ type: "addColor" });
+    } else {
+      console.log("no view");
+      // queue up the message
+      setTimeout(() => this.searchError(err), 1000);
+      // vscode.commands.executeCommand("googlerr.searchErr", err);
     }
   }
 
-  public clearColors() {
+  public clear() {
     if (this._view) {
       this._view.webview.postMessage({ type: "clear" });
+    }
+  }
+  public wrapping() {
+    if (this._view) {
+      this._view.webview.postMessage({ type: "wrapping" });
+    }
+  }
+  public show() {
+    if (this._view) {
+      this._view.show?.(true); // `show` is not implemented in 1.49 but is for 1.50 insiders
+    } else {
+      // run command
+      vscode.commands.executeCommand("googlerr-sidebar-view.focus");
     }
   }
 
@@ -100,7 +113,7 @@ export class ColorsViewProvider implements vscode.WebviewViewProvider {
 				<link href="${styleMainUri}" rel="stylesheet">
 				<script nonce="${nonce}">var exports = {}; var require = {};</script>
 
-				<title>Cat Colors</title>
+				<title>Google the bugs away</title>
 			</head>
 			<body>
 				<script type="module" nonce="${nonce}" src="${scriptUri}"></script>
