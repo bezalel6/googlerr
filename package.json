@@ -1,7 +1,8 @@
 {
   "name": "googlerr",
   "description": "Googlerr - google your way out of any error",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "icon": "media/bitmap.png",
   "publisher": "bezalel6",
   "license": "MIT",
   "engines": {
@@ -27,7 +28,7 @@
         {
           "id": "googlerr-sidebar-view",
           "title": "Googlerr",
-          "icon": "$(bracket-error)"
+          "icon": "media/bitmap.svg"
         }
       ]
     },
@@ -55,8 +56,18 @@
       {
         "command": "googlerr.wrapping",
         "category": "Googlerr",
-        "title": "code wrapping - will make code pretty but might break borders",
+        "title": "toggle code wrapping - will make code pretty but might break borders",
         "icon": "$(word-wrap)"
+      },
+      {
+        "command": "googlerr.sayHello",
+        "category": "Googlerr",
+        "title": "say hi"
+      },
+      {
+        "command": "googlerr.searchSelected",
+        "category": "Googlerr",
+        "title": "Google selected"
       }
     ],
     "menus": {
@@ -70,6 +81,17 @@
           "command": "googlerr.wrapping",
           "group": "navigation",
           "when": "view == googlerr-sidebar-view"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "googlerr.sayHello",
+          "group": "navigation"
+        },
+        {
+          "when": "editorHasSelection",
+          "command": "googlerr.searchSelected",
+          "group": "navigation"
         }
       ]
     }

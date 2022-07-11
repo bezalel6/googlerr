@@ -36,6 +36,15 @@ export class ViewProvider implements vscode.WebviewViewProvider {
     //   }
     // });
   }
+  public searchSelected() {
+    // get the selected text
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+      const selection = editor.selection;
+      const text = editor.document.getText(selection);
+      this.searchError({ error: text });
+    }
+  }
   public searchError(err: LintingError) {
     this.show();
     if (this._view) {
@@ -44,7 +53,7 @@ export class ViewProvider implements vscode.WebviewViewProvider {
     } else {
       console.log("no view");
       // queue up the message
-      setTimeout(() => this.searchError(err), 1000);
+      setTimeout(() => this.searchError(err), 500);
       // vscode.commands.executeCommand("googlerr.searchErr", err);
     }
   }

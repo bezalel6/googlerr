@@ -5,12 +5,6 @@ body {
 .questions {
   counter-reset: questions;
 }
-/* *,
-*::before,
-*::after {
-  word-wrap: break-word;
-} */
-
 code[wrapping] {
   display: inline-block;
   white-space: normal;
@@ -18,11 +12,17 @@ code[wrapping] {
   word-break: break-word;
   word-wrap: break-word;
 }
-.question::before {
+.big-bottom-divide {
+  border-bottom: 5px double var(--vscode-editor-foreground);
+}
+.bottom-divide {
+  border-bottom: 3px solid var(--vscode-editor-foreground);
+}
+/* .question::before {
   counter-increment: questions;
   content: "Similar question " counter(questions) ":";
   text-decoration: underline;
-}
+} */
 .question {
   word-wrap: break-word;
 
@@ -30,11 +30,28 @@ code[wrapping] {
   font-size: small;
   margin-top: 25px;
   counter-reset: answers;
-  outline: 2px solid ivory;
-  outline-offset: 5px;
-  /* border: 2px solid ivory; */
-}
 
+  /* outline: 2px solid ivory; */
+  /* outline-offset: 5px; */
+}
+/* .collapse-parent[collapsed] + .collapse-child {
+  height: 0;
+  display: none;
+}
+.collapse-parent + .collapse-child {
+  height: 100%;
+  display: block;
+} */
+.collapse-parent[collapsed]::before {
+  transform: rotate(0deg);
+}
+.collapse-parent::before {
+  content: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg' fill='%239da5b3'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9 13.887l5-5V8.18l-5-5-.707.707 4.146 4.147H2v1h10.44L8.292 13.18l.707.707z'/%3E%3C/svg%3E");
+  display: inline-block;
+  transition-duration: 0.1s;
+  transition-property: transform;
+  transform: rotate(90deg);
+}
 .answer::before {
   counter-increment: answers;
   content: "Answer " counter(answers) ":";
@@ -42,7 +59,6 @@ code[wrapping] {
   text-decoration: underline;
 }
 .answer {
-  /* border: 2px solid yellow; */
   outline-offset: 2px;
 }
 .title {
@@ -50,4 +66,7 @@ code[wrapping] {
 }
 .answer + .answer {
   margin-top: 20px;
+}
+path {
+  fill: orange;
 }

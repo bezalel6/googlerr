@@ -2,8 +2,8 @@ import { Diagnostic } from "vscode";
 
 export type LintingError = {
   error: string;
-  origin: string;
-  fullError: Diagnostic;
+  origin?: string;
+  fullError?: Diagnostic;
 };
 export interface Message {
   command: string;

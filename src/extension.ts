@@ -1,27 +1,34 @@
-import { FC } from "react";
-import React = require("react");
 import * as vscode from "vscode";
 import { ViewProvider } from "./ViewProvider";
 import { LintingError } from "./types";
 
 export function activate(context: vscode.ExtensionContext) {
-  console.log("ACTIVATING");
   const provider = new ViewProvider(context.extensionUri);
 
   context.subscriptions.push(
-    vscode.languages.registerCodeActionsProvider("*", new Emojizer(), {
-      providedCodeActionKinds: Emojizer.providedCodeActionKinds,
+    vscode.languages.registerCodeActionsProvider("*", new ActionProvider(), {
+      providedCodeActionKinds: ActionProvider.providedCodeActionKinds,
     })
   );
 
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(ViewProvider.viewType, provider)
   );
-
   context.subscriptions.push(
     vscode.commands.registerCommand("googlerr.searchErr", (e) => {
       provider.searchError(e);
-      // provider.addColor();
+    })
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("googlerr.searchSelected", (e) => {
+      // get selection
+
+      provider.searchSelected();
+    })
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("googlerr.sayHello", (e) => {
+      vscode.window.showInformationMessage("hello");
     })
   );
 
@@ -35,14 +42,6 @@ export function activate(context: vscode.ExtensionContext) {
       provider.wrapping();
     })
   );
-  const statusBarItem = vscode.window.createStatusBarItem(
-    vscode.StatusBarAlignment.Right,
-    10
-  );
-  statusBarItem.command = "googlerr-sidebar-view.focus";
-  statusBarItem.text = "MYVIEW";
-  statusBarItem.show();
-  context.subscriptions.push(statusBarItem);
 
   context.subscriptions.push(
     vscode.commands.registerCommand(COMMAND, () =>
@@ -54,7 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
     )
   );
 }
-export class Emojizer implements vscode.CodeActionProvider {
+export class ActionProvider implements vscode.CodeActionProvider {
   public static readonly providedCodeActionKinds = [
     vscode.CodeActionKind.QuickFix,
   ];
