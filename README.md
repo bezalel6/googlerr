@@ -1,10 +1,10 @@
-# Calico Colors — Webview View API Sample
+# Googlerr — Search for error solutions on Stack Overflow
 
 Demonstrates VS Code's proposed [webview view API](https://github.com/microsoft/vscode/issues/46585). This includes:
 
 - Contributing a webview based view to the explorer.
 - Posting messages from an extension to a webview view
-- Posting message from a webview to an extension  
+- Posting message from a webview to an extension
 - Persisting state in the view.
 - Contributing commands to the view title.
 
@@ -21,4 +21,4 @@ Demonstrates VS Code's proposed [webview view API](https://github.com/microsoft/
 - `npm run watch` or `npm run compile`
 - `F5` to start debugging
 
-In the explorer, expand the `Calico Colors` view.
+Select the quick fix on any error to google it. you can also select any text and google similar questions from the context menu.
