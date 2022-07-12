@@ -66,7 +66,7 @@ let wrapping = false;
  *
  */
 function resetHeader() {
-  setHeader("select from context menu or quick fix");
+  setHeader("Select a quick fix to google an error");
 }
 function resetDoc() {
   contentDiv!.childNodes.forEach((node) => node.remove());
